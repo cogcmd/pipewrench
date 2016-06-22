@@ -1,0 +1,12 @@
+---
+cog_bundle_version: 3
+name: pipewrench
+version: "0.1.1"
+docker:
+  image: cogcmd/pipewrench
+  tag: "0.1.1"
+commands:
+  for:
+    executable: /home/bundle/cog-command
+    documentation: "pipewrench:for name in <arg1> ... <argN> - generate a list of objects with the value of arg1..N as the value of the field with the given name"
+    rules: [ 'allow' ]
