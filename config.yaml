@@ -1,6 +1,7 @@
 ---
 cog_bundle_version: 3
 name: pipewrench
+description: "Miscellaneous Cog pipeline utilities"
 version: "0.1.1"
 docker:
   image: cogcmd/pipewrench
@@ -8,5 +9,6 @@ docker:
 commands:
   for:
     executable: /home/bundle/cog-command
+    description: "Generator function for pipeline inputs"
     documentation: "pipewrench:for name in <arg1> ... <argN> - generate a list of objects with the value of arg1..N as the value of the field with the given name"
     rules: [ 'allow' ]
