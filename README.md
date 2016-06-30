@@ -1,6 +1,6 @@
 # pipewrench
 
-Miscellaneous helpers for working with Cog comamnd pipelines
+Miscellaneous helpers for working with Cog command pipelines
 
 ## Commands
 
