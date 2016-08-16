@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'cog-rb'
+gem 'text-table'
+gem 'cog-rb', '~> 0.1.9'
