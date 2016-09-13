@@ -1,37 +1,60 @@
 ---
-cog_bundle_version: 3
+cog_bundle_version: 4
 name: pipewrench
 description: "Miscellaneous Cog pipeline utilities"
-version: "0.2.0"
+author: Operable <support@operable.io>
+homepage: https://github.com/cogcmd/pipewrench
+version: "0.2.1"
 docker:
   image: cogcmd/pipewrench
-  tag: "0.2.0"
+  tag: "0.2.1"
 commands:
   for:
     executable: /home/bundle/cog-command
     description: "Generator function for pipeline inputs"
-    documentation: "pipewrench:for name in <arg1> ... <argN> - generate a list of objects with the value of arg1..N as the value of the field with the given name"
+    arguments: "<name> in <arg1> [<arg2>...]"
+    long_description: "Create a list of objects with the value of arg1..N as the value of the field with the given name"
+    examples: |
+      pipewrench:for x in a b c | operable:echo $x
+      > a
+        b
+        c
+
     rules: [ 'allow' ]
   dump:
     executable: /home/bundle/cog-command
     description: "Return Cog pipeline options and input"
-    documentation: |
-      debug:dump [--env | -e] [--input | -i]
-
-      Options:
-        --env     Only return environment variables
-        --input   Only return STDIN content
+    long_description: Show the environment variables and inputs that a command would receive. Useful for debugging commands.
+    examples: |
+      pipewrench:for x in a | pipewrench:dump
     options:
       env:
+        description: Only return environment variables
         type: bool
         required: false
         short_flag: e
       input:
+        description: Only return STDIN content
         type: bool
         required: false
         short_flag: i
     rules: [ 'allow' ]
 templates:
-  preformatted:
-    slack: '>>> ```{{{ body }}}```'
-    hipchat: '<pre>{{{ body }}}</pre>'
+  dump:
+    body: |
+      ~each var=$results~
+      ~if cond=$item.env~
+      **Environment Variables**
+
+      | Name | Value |
+      |------|-------|
+      ~each var=$item.env as=e~|~$e.name~|~$e.value~|
+      ~end~
+      ~br~
+      ~end~
+      ~if cond=$item.input~
+      **Inputs**
+      ~json var=$item.input~
+      ~br~
+      ~end~
+      ~end~
