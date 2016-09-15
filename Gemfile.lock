@@ -1,17 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    cog-rb (0.1.12)
+    cog-rb (0.1.15)
       rake (~> 11.2)
     rake (11.2.2)
-    text-table (1.2.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   cog-rb (~> 0.1.9)
-  text-table
 
 BUNDLED WITH
    1.12.5
